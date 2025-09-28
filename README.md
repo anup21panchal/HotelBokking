@@ -96,7 +96,8 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
-  packages-to-scan: com.hotel.hotel_booking_service```
+  packages-to-scan: com.hotel.hotel_booking_service
+```
 
 ## 🚀 Build & Run
 ```bash

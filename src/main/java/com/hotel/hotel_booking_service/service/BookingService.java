@@ -81,7 +81,7 @@ public class BookingService {
         );
 
         if (!conflicts.isEmpty()) {
-            throw new ConflictException("Booking conflict: overlapping booking exists");
+            throw new ApiException("Booking conflict: overlapping booking exists",400);
         }
 
         Booking booking = new Booking(hotelId, customerName, customerEmail, customerPhone, startDate, endDate);

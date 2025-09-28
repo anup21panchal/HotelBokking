@@ -6,7 +6,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application using a lightweight JDK 17 image
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 COPY --from=build /app/target/hotel-booking-service-0.0.1-SNAPSHOT.jar app.jar

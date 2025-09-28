@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /hotel
+
+spring:
+  profiles:
+    active: pro
+  

@@ -79,7 +79,7 @@ spring:
 # application-level settings
 support:
   email:
-    to: tempsacwork@yahoo.com
+    to: user@example.com
 
 # prefix used to build confirmation URL in NotificationService
 app:
@@ -108,6 +108,8 @@ springdoc:
 ## 🔗 Swagger & OpenAPI
 - Swagger UI → [http://localhost:8080/hotel/swagger-ui.html](http://localhost:8080/hotel/swagger-ui.html)
 - OpenAPI JSON → [http://localhost:8080/hotel/api-docs](http://localhost:8080/hotel/api-docs)
+- Deployed URL → [https://hotelbokking-11.onrender.com/hotel/swagger-ui/index.html#](https://hotelbokking-11.onrender.com/hotel/swagger-ui/index.html#)
+
 
 🔑 Use the **Authorize** button in Swagger UI to provide your JWT:[Token]
 
@@ -229,6 +231,20 @@ All responses follow the **ApiResponse** format.
   "code": 401
 }
 ```
+
+###  🔒 Role-Based Access
+
+- Booking Endpoints (BookingController)
+- Allowed Roles → staff, reception
+
+Any other role → 403 Forbidden
+```http
+{
+  POST /hotel/api/hotels/{hotelId}/bookings
+  Authorization: Bearer <token>
+}
+```
+
 # 🧭 Step-by-Step API Flow (call these in order)
 
 1)

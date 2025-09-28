@@ -8,7 +8,7 @@ It also supports email notifications (via Mailtrap for development).
 
 ## 🚀 Tech Stack
 - Java 17
-- Spring Boot 3.4
+- Spring Boot 3.5.6
 - Spring Web, Spring Security (JWT), Spring Data MongoDB
 - Jakarta Validation
 - Spring Mail (Mailtrap for development)
@@ -51,33 +51,52 @@ git clone https://github.com/anup21panchal/HotelBokking.git
 Example configuration:
 
 ```yaml
-server:
-  servlet:
-    context-path: /hotel
-
 spring:
+  jackson:
+    default-property-inclusion: non_null
   data:
     mongodb:
-      uri: mongodb://localhost:27017/hotel-db
+      uri: ${MONGODB_URI}
+
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: https://dev-1tbxzi5afsy5e1pd.us.auth0.com/
-  mail:
-    host: sandbox.smtp.mailtrap.io
-    port: 2525
-    username: <MAILTRAP_USERNAME>
-    password: <MAILTRAP_PASSWORD>
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# application-level settings
 support:
   email:
-    to: support@hotel.com
+    to: tempsacwork@yahoo.com
 
+# prefix used to build confirmation URL in NotificationService
 app:
   frontend:
-    confirm-url-prefix: http://localhost:8080/api/registration/confirm?token=
-```
+    confirm-url-prefix: http://localhost:8080/api/auth/confirm?token=
+
+
+logging:
+  level:
+    root: INFO
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: com.hotel.hotel_booking_service```
 
 ## 🚀 Build & Run
 ```bash

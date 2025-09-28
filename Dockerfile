@@ -4,16 +4,16 @@ WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run
+# Stage 2: Run (Debian-based with CA certs)
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
-# Install CA certificates (important for Atlas TLS handshake)
+# Install root CA certificates for TLS
 RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
 
 COPY --from=build /app/target/hotel-booking-service-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
-# Force TLS 1.2 to avoid internal_error
+# Force TLS 1.2 handshake (Atlas sometimes fails otherwise)
 ENTRYPOINT ["java","-Djdk.tls.client.protocols=TLSv1.2","-jar","app.jar","--spring.profiles.active=pro"]
